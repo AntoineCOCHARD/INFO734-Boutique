@@ -1,1 +1,1 @@
-INFO734 - Projet de création d'une boutique en ligne
+Chapter 21: Add endpoint on /api/v1

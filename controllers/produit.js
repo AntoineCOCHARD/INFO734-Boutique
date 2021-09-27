@@ -3,7 +3,9 @@ function createProduit(req, res) {
     let newProduit = Produit ({
         title: req.body.title,
         description : req.body.description,
-        prix : req.body.prix
+        prix : req.body.prix,
+        photo : req.body.photo,
+        id_categorie : req.body.id_categorie
     });
   
     newProduit.save()
@@ -49,7 +51,8 @@ function updateProduit(req, res) {
     Produit.findByIdAndUpdate({_id: req.params.id}, 
         {title : req.body.title, 
         description : req.body.description,
-        prix : req.body.prix}, 
+        prix : req.body.prix,
+        id_categorie : req.body.id_categorie}, 
         {new : true})
     .then((updatedProduit) => {
         res.status(200).json(updatedProduit);

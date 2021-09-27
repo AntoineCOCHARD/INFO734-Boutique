@@ -6,6 +6,9 @@ var ProduitSchema = new Schema({
   title : String,
   description : String,
   prix : Number,
+  photo :{type : String,
+    default : "./images/default.png"},
+  id_categorie : String,
 });
 
 module.exports = mongoose.model('Produit', ProduitSchema);

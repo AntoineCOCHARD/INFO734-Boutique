@@ -2,7 +2,8 @@ function createCategorie(req, res) {
     let Categorie = require('../models/categorie');
     let newCategorie = Categorie ({
         nom: req.body.nom,
-        description : req.body.description
+        description : req.body.description,
+        id_boutique : req.body.id_boutique
     });
   
     newCategorie.save()
@@ -47,7 +48,8 @@ function updateCategorie(req, res) {
 
     Categorie.findByIdAndUpdate({_id: req.params.id}, 
         {nom : req.body.nom, 
-        description : req.body.description}, 
+        description : req.body.description,
+        id_boutique : req.body.id_boutique},
         {new : true})
     .then((updatedCategorie) => {
         res.status(200).json(updatedCategorie);
