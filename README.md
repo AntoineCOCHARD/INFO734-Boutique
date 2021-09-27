@@ -1,1 +1,1 @@
-# INFO734-Boutique
+INFO734 - Projet de création d'une boutique en ligne
