@@ -75,7 +75,7 @@ export class ViewBoutiquePage implements OnInit {
     console.log(this.title);
     console.log(this.boutique._id);
 
-    this.boutique.nom = this.title;
+    this.boutique.title = this.title;
     this.boutique.description = this.description;
 
     this.saveBoutique();
