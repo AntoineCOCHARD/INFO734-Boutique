@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/listCategory"><ion-icon slot="icon-only" name="arrow-round-back"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>Add a Category</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()"> <ion-icon slot="icon-only" name="save"></ion-icon></ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="category">
+      <ion-item>
+        <ion-label>Category</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" formControlName="nom"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Description</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-textarea formControlName="description" rows="10"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label>Boutique</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-select formControlName="id_boutique" >
+            <ion-select-option *ngFor="let boutique of boutiques" value="{{boutique._id}}">{{boutique.title}}</ion-select-option >
+        </ion-select>
+      </ion-item>
+  </form>
+</ion-content>

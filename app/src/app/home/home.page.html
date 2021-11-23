@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      Home page
+    </ion-title>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content>
+  <ion-menu side="start" menuId="custom" contentId="main" class="my-custom-menu">
+    <ion-header>
+      <ion-toolbar color="light">
+        <ion-title>Choisir</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="/" routerDirection="forward">Home</ion-item>
+        <ion-item>
+          <ion-item slot="start" routerLink="/listBoutique" routerDirection="forward">Boutique</ion-item>
+            <ion-buttons slot="end">
+              <ion-button routerLink="/addBoutique" routerDirection="forward">
+                <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+        </ion-item>
+        <ion-item>
+          <ion-item slot="start" routerLink="/listCategory" routerDirection="forward">Categorie</ion-item>
+            <ion-buttons slot="end">
+              <ion-button routerLink="/addCategory" routerDirection="forward">
+                <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+        </ion-item>
+          <ion-item>
+            <ion-item slot="start" routerLink="/listProduct" routerDirection="forward">Produit</ion-item>
+              <ion-buttons slot="end">
+                <ion-button routerLink="/addProduct" routerDirection="forward">
+                  <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+          </ion-item>
+
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+
+</ion-content>
