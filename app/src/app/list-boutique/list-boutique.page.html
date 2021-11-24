@@ -15,21 +15,16 @@
 </ion-header>
 
 <ion-content>
-    
-
   <ion-list *ngFor="let boutique of boutiques">
-    <ion-item-sliding #item>
-      
-        <ion-item ion-button routerLink="/listCategory/{{boutique._id}}">
-          {{boutique.title}}
+    <ion-card>
+      <ion-item color="warning">
+        <ion-button expand="block" fill="clear" color="light" routerLink="/listCategory/{{boutique._id}}">{{boutique.title}}</ion-button>
+        <ion-button slot="end" expand="block" fill="outline" color="primary" routerLink="/viewBoutique/{{boutique._id}}">Edit</ion-button>
+        <ion-button slot="end" expand="block" fill="outline" color="danger" (click)="delete([boutique._id])" >Delete</ion-button>
+      </ion-item>
+      <ion-item>
+            {{boutique.description}}
         </ion-item>
-      
-      
-
-      <ion-item-options side="end">
-        <button ion-button color="light" routerLink="/viewBoutique/{{boutique._id}}">Edit</button>
-        <button ion-button (click)="delete([boutique._id])" color="danger">Delete</button>
-      </ion-item-options>
-    </ion-item-sliding>
+    </ion-card>
   </ion-list>
 </ion-content>

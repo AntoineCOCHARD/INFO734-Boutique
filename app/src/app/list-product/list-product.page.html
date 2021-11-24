@@ -14,20 +14,29 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>    
+<ion-content>
   <ion-list *ngFor="let produit of produits">
-    <ion-item-sliding #item>
-      
-        <ion-item ion-button routerLink="/viewProduct/{{produit._id}}">
+      <ion-card>
+        <ion-item color="warning">
           {{produit.nom}}
+          <ion-button slot="end" expand="block" fill="outline" color="primary" routerLink="/viewProduct/{{produit._id}}">Edit</ion-button>
+          <ion-button slot="end" expand="block" fill="outline" color="danger" (click)="delete([produit._id])" >Delete</ion-button>
         </ion-item>
-      
-      
+    <ion-item>
+      <ion-item>
+        image
+      </ion-item>
+      <ion-list>
+        <ion-item>
+          {{produit.description}}
+        </ion-item>
+        <ion-item>
+          Prix : {{produit.prix}}
+        </ion-item>
+      </ion-list>
+    </ion-item>
 
-      <ion-item-options side="end">
-        <button ion-button color="light" routerLink="/viewProduct/{{produit._id}}">Edit</button>
-        <button ion-button (click)="delete([produit._id])" color="danger">Delete</button>
-      </ion-item-options>
-    </ion-item-sliding>
+    </ion-card>
+
   </ion-list>
 </ion-content>
