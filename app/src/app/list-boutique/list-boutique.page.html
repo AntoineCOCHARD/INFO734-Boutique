@@ -18,13 +18,20 @@
   <ion-list *ngFor="let boutique of boutiques">
     <ion-card>
       <ion-item color="warning">
+        
         <ion-title class="hovering" expand="block" fill="clear" color="light" routerLink="/listCategory/{{boutique._id}}">{{boutique.title}}</ion-title>
         <ion-button expand="block" fill="outline" color="primary" routerLink="/viewBoutique/{{boutique._id}}">Edit</ion-button>
         <ion-button expand="block" fill="outline" color="danger" (click)="alertDeleteBoutique([boutique._id])" >Delete</ion-button>
       </ion-item>
       <ion-item>
-            {{boutique.description}}
-        </ion-item>
+        <!-- image -->
+        <ion-item></ion-item>
+        <ion-item>
+          {{boutique.description}}
+      </ion-item>
+      </ion-item>
+     
+      
     </ion-card>
   </ion-list>
 </ion-content>
