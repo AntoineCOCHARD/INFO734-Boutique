@@ -3,6 +3,8 @@ import { LoadingController } from '@ionic/angular';
 import { RestService } from '../rest.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-view',
   templateUrl: './view-category.page.html',
@@ -19,6 +21,7 @@ export class ViewCategoryPage implements OnInit {
   constructor(public restapi: RestService, 
     public loadingController: LoadingController, 
     private route: ActivatedRoute, 
+    public alertController: AlertController,
     public router : Router) {
 
     this.api = restapi;
@@ -53,7 +56,7 @@ export class ViewCategoryPage implements OnInit {
     await this.api.updateCategory(this.category._id, this.category)
     .subscribe(res => {
         console.log(res);
-        this.router.navigate(['/listCategory']);
+        this.router.navigate(['/listCategory/']);
       }, (err) => {
         console.log(err);
       });
@@ -63,7 +66,7 @@ export class ViewCategoryPage implements OnInit {
     await this.api.deleteCategory(this.category._id)
     .subscribe(res => {
         console.log(res);
-        this.router.navigate(['/listCategory']);
+        this.router.navigate(['/listCategory/']);
       }, (err) => {
         console.log(err);
       });
@@ -86,6 +89,59 @@ export class ViewCategoryPage implements OnInit {
 
     this.deleteCategory();
     
+  }
+
+  async alertNoSave() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Attention !',
+      message: 'Si vous continuez, les données <strong>ne</strong> seront <strong>pas</strong> sauvegardées',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Annuler');
+          }
+        }, {
+          text: 'Continuer',
+          handler: () => {
+            console.log('Continuer');
+            this.router.navigate(['/listCategory/'])
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  
+
+  async alertDeleteCategory() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Attention !',
+      message: 'Si vous continuez, la catégorie sera <strong>supprimée</strong>',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Annuler');
+          }
+        }, {
+          text: 'Continuer',
+          handler: () => {
+            console.log('Continuer');
+            this.delete()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   ngOnInit() {

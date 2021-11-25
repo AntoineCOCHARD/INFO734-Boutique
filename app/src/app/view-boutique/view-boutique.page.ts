@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { RestService } from '../rest.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-view-boutique',
@@ -18,7 +19,8 @@ export class ViewBoutiquePage implements OnInit {
 
   constructor(public restapi: RestService, 
     public loadingController: LoadingController, 
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
+    public alertController: AlertController,
     public router : Router) {
 
     this.api = restapi;
@@ -87,6 +89,60 @@ export class ViewBoutiquePage implements OnInit {
     this.deleteBoutique();
     
   }
+
+  async alertNoSave() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Attention !',
+      message: 'Si vous continuez, les données <strong>ne</strong> seront <strong>pas</strong> sauvegardées',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Annuler');
+          }
+        }, {
+          text: 'Continuer',
+          handler: () => {
+            console.log('Continuer');
+            this.router.navigate(['/listBoutique'])
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  
+
+  async alertDeleteBoutique() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Attention !',
+      message: 'Si vous continuez, la boutique sera <strong>supprimée</strong>',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Annuler');
+          }
+        }, {
+          text: 'Continuer',
+          handler: () => {
+            console.log('Continuer');
+            this.delete()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  
 
   ngOnInit() {
     this.route.paramMap.subscribe((params : ParamMap)=> {

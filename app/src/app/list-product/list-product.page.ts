@@ -4,6 +4,8 @@ import { LoadingController, NavController } from '@ionic/angular';
 import { RestService } from '../rest.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'list-product.page.html',
@@ -18,7 +20,8 @@ export class ListProductPage {
   constructor(public restapi: RestService, 
     public loadingController: LoadingController,
     public navController: NavController,
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
+    public alertController: AlertController,
     public router : Router) {
 
     this.api = restapi;
@@ -59,6 +62,31 @@ export class ListProductPage {
   delete(id:any) {
     this.deleteProduit(id);
   }
+
+  async alertDeleteProduct(id:any) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Attention !',
+      message: 'Si vous continuez, le produit sera <strong>supprimé</strong>',
+      buttons: [
+        {
+          text: 'Annuler',
+          handler: () => {
+            console.log('Annuler');
+          }
+        }, {
+          text: 'Continuer',
+          handler: () => {
+            console.log('Continuer');
+            this.delete(id)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  
 
   ngOnInit() {
     this.route.paramMap.subscribe((params : ParamMap)=> {

@@ -4,6 +4,8 @@ import { LoadingController, NavController } from '@ionic/angular';
 import { RestService } from '../rest.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-list-category',
   templateUrl: './list-category.page.html',
@@ -20,6 +22,7 @@ export class ListCategoryPage {
     public loadingController: LoadingController,
     public navController: NavController,
     private route: ActivatedRoute, 
+    public alertController: AlertController,
     public router : Router) {
 
     this.api = restapi;
@@ -57,6 +60,30 @@ export class ListCategoryPage {
 
   delete(id:any) {
     this.deleteCategory(id);
+  }
+
+  async alertDeleteCategory(id:any) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Attention !',
+      message: 'Si vous continuez, la catégorie sera <strong>supprimée</strong>',
+      buttons: [
+        {
+          text: 'Annuler',
+          handler: () => {
+            console.log('Annuler');
+          }
+        }, {
+          text: 'Continuer',
+          handler: () => {
+            console.log('Continuer');
+            this.delete(id)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   ngOnInit() {

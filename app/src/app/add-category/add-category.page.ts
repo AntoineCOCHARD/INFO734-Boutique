@@ -4,6 +4,8 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { RestService } from '../rest.service';
 import { ActivatedRoute, Router  } from '@angular/router';
 
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.page.html',
@@ -19,6 +21,7 @@ export class AddCategoryPage implements OnInit {
     public loadingController: LoadingController,
     private route: ActivatedRoute,
     public router: Router,
+    public alertController: AlertController,
     private formBuilder: FormBuilder) {
       this.category = this.formBuilder.group({
             nom: [''],
@@ -49,7 +52,7 @@ export class AddCategoryPage implements OnInit {
   async saveCategory(){
     await this.api.createCategory(this.category.value)
     .subscribe(res => {
-        this.router.navigate(['/listCategory']);
+        this.router.navigate(['/listCategory/']);
       }, (err) => {
         console.log(err);
       });
@@ -57,7 +60,32 @@ export class AddCategoryPage implements OnInit {
 
   save() {
     this.saveCategory();
+  }
 
+  async alertNoSave() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Attention !',
+      message: 'Si vous continuez, les données <strong>ne</strong> seront <strong>pas</strong> sauvegardées',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Annuler');
+          }
+        }, {
+          text: 'Continuer',
+          handler: () => {
+            console.log('Continuer');
+            this.router.navigate(['/listCategory/'])
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   ngOnInit() {

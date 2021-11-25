@@ -18,9 +18,9 @@
   <ion-list *ngFor="let category of categories">
     <ion-card>
       <ion-item color="warning">
-        <ion-button expand="block" fill="clear" color="light" routerLink="/listProduct/{{category._id}}">{{category.nom}}</ion-button>
+        <ion-title class="hovering" expand="block" fill="clear" color="light" routerLink="/listProduct/{{category._id}}">{{category.nom}}</ion-title>
         <ion-button slot="end" expand="block" fill="outline" color="primary" routerLink="/viewCategory/{{category._id}}">Edit</ion-button>
-        <ion-button slot="end" expand="block" fill="outline" color="danger" (click)="delete([category._id])" >Delete</ion-button>
+        <ion-button slot="end" expand="block" fill="outline" color="danger" (click)="alertDeleteCategory([category._id])" >Delete</ion-button>
       </ion-item>
       <ion-item>
             {{category.description}}

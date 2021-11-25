@@ -4,6 +4,8 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { RestService } from '../rest.service';
 import { ActivatedRoute, Router  } from '@angular/router';
 
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-add',
   templateUrl: './add-product.page.html',
@@ -18,6 +20,7 @@ export class AddProductPage implements OnInit {
     public loadingController: LoadingController,
     private route: ActivatedRoute,
     public router: Router,
+    public alertController: AlertController,
     private formBuilder: FormBuilder) {
       this.produit = this.formBuilder.group({
             nom: [''],
@@ -59,6 +62,32 @@ export class AddProductPage implements OnInit {
     console.log(this.produit.value);
     this.saveProduit();
 
+  }
+
+  async alertNoSave() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Attention !',
+      message: 'Si vous continuez, les données <strong>ne</strong> seront <strong>pas</strong> sauvegardées',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Annuler');
+          }
+        }, {
+          text: 'Continuer',
+          handler: () => {
+            console.log('Continuer');
+            this.router.navigate(['/listProduct/'])
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   ngOnInit() {

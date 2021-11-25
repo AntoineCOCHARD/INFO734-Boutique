@@ -4,6 +4,8 @@ import { LoadingController, NavController } from '@ionic/angular';
 import { RestService } from '../rest.service';
 import {Router} from '@angular/router';
 
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-list-boutique',
   templateUrl: './list-boutique.page.html',
@@ -16,6 +18,7 @@ export class ListBoutiquePage implements OnInit {
   constructor(public restapi: RestService, 
     public loadingController: LoadingController, 
     public navController : NavController, 
+    public alertController: AlertController,
     public router : Router) {
 
     this.api = restapi;
@@ -53,6 +56,32 @@ export class ListBoutiquePage implements OnInit {
 
   delete(id:any) {
     this.deleteBoutique(id);
+  }
+
+  async alertDeleteBoutique(id:any) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Attention !',
+      message: 'Si vous continuez, la boutique sera <strong>supprimée</strong>',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Annuler');
+          }
+        }, {
+          text: 'Continuer',
+          handler: () => {
+            console.log('Continuer');
+            this.delete(id)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   ngOnInit() {
