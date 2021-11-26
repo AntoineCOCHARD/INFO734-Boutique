@@ -17,6 +17,7 @@ export class ViewProductPage implements OnInit {
   nom : string;
   description : string;
   prix : string;
+  image : string;
 
   constructor(public restapi: RestService, 
     public loadingController: LoadingController, 
@@ -45,6 +46,7 @@ export class ViewProductPage implements OnInit {
         this.nom = this.produit.nom;
         this.description = this.produit.description;
         this.prix = this.produit.prix;
+        this.image = this.produit.image;
         loading.dismiss();
       }, err => {
         console.log(err);
@@ -57,7 +59,7 @@ export class ViewProductPage implements OnInit {
     await this.api.updateProduit(this.produit._id, this.produit)
     .subscribe(res => {
         console.log(res);
-        this.router.navigate(['/listProduct']);
+        this.router.navigate(['/listProduct/' + this.produit.id_categorie]);
       }, (err) => {
         console.log(err);
       });
@@ -67,7 +69,7 @@ export class ViewProductPage implements OnInit {
     await this.api.deleteProduit(this.produit._id)
     .subscribe(res => {
         console.log(res);
-        this.router.navigate(['/listProduct']);
+        this.router.navigate(['/listProduct/' + this.produit.id_categorie]);
       }, (err) => {
         console.log(err);
       });
@@ -79,10 +81,12 @@ export class ViewProductPage implements OnInit {
     console.log(this.nom);
     console.log(this.prix);
     console.log(this.produit._id);
+    console.log(this.image);
 
     this.produit.nom = this.nom;
     this.produit.description = this.description;
     this.produit.prix = this.prix;
+    this.produit.image = this.image;
 
     this.saveProduit();
 
@@ -111,7 +115,7 @@ export class ViewProductPage implements OnInit {
           text: 'Continuer',
           handler: () => {
             console.log('Continuer');
-            this.router.navigate(['/listProduct/'])
+            this.router.navigate(['/listProduct/' + this.produit.id_categorie])
           }
         }
       ]

@@ -4,7 +4,7 @@ function createProduit(req, res) {
         nom: req.body.nom,
         description : req.body.description,
         prix : req.body.prix,
-        photo : req.body.photo,
+        image : req.body.image,
         id_categorie : req.body.id_categorie
     });
   
@@ -65,7 +65,8 @@ function updateProduit(req, res) {
         {nom : req.body.nom, 
         description : req.body.description,
         prix : req.body.prix,
-        id_categorie : req.body.id_categorie}, 
+        id_categorie : req.body.id_categorie,
+        image : req.body.image },
         {new : true})
     .then((updatedProduit) => {
         res.status(200).json(updatedProduit);

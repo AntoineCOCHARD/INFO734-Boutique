@@ -3,8 +3,8 @@ function createCategorie(req, res) {
     let newCategorie = Categorie ({
         nom: req.body.nom,
         description : req.body.description,
-        id_boutique : req.body.id_boutique
-    });
+        id_boutique : req.body.id_boutique,
+        image : req.body.image});
   
     newCategorie.save()
     .then((savedCategorie) => {
@@ -62,7 +62,8 @@ function updateCategorie(req, res) {
     Categorie.findByIdAndUpdate({_id: req.params.id}, 
         {nom : req.body.nom, 
         description : req.body.description,
-        id_boutique : req.body.id_boutique},
+        id_boutique : req.body.id_boutique,
+        image : req.body.image},
         {new : true})
     .then((updatedCategorie) => {
         res.status(200).json(updatedCategorie);

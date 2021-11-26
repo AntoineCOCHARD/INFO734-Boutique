@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="alertNoSave()"><ion-icon slot="icon-only" name="arrow-round-back"></ion-icon></ion-button>
+      <ion-button (click)="alertNoSave()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
     <ion-title>
       <span *ngIf="category" ngDefaultControl [(ngModel)]="nom">{{category.nom}}</span>
@@ -25,6 +25,15 @@
   </ion-item>
   <ion-item>
     <ion-textarea value="{{category.description}}" rows="10" *ngIf="category" ngDefaultControl [(ngModel)]="description"></ion-textarea>
+  </ion-item>
+  <ion-item color="warning">
+    <ion-label>Image</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-textarea *ngIf="category" value="{{category.image}}" rows="7" ngDefaultControl [(ngModel)]="image"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-img *ngIf="category" style="width: 160px; height: 160px;" src={{category.image}}></ion-img>
   </ion-item>
 
 </ion-content>

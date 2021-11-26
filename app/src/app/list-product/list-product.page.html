@@ -16,23 +16,27 @@
 
 <ion-content>
   <ion-list *ngFor="let produit of produits">
-      <ion-card>
-        <ion-item color="warning">
-          <ion-title expand="block" fill="clear" color="light">{{produit.nom}}</ion-title>
-          <ion-button slot="end" expand="block" fill="outline" color="primary" routerLink="/viewProduct/{{produit._id}}">Edit</ion-button>
-          <ion-button slot="end" expand="block" fill="outline" color="danger" (click)="alertDeleteProduct([produit._id])" >Delete</ion-button>
-        </ion-item>
-    <ion-item>
-        image
-      <ion-list>
-        <ion-item>
-          {{produit.description}}
-        </ion-item>
-        <ion-item>
-          Prix : {{produit.prix}}
-        </ion-item>
-      </ion-list>
-    </ion-item>
+    <ion-card>
+      <ion-item color="warning">
+        <ion-title expand="block" fill="clear" color="light">{{produit.nom}}</ion-title>
+      </ion-item>
+      <br/>
+      <ion-item>
+        <ion-img style="width: 120px; height: 120px;" src={{produit.image}}></ion-img>
+        <ion-list>
+          <ion-item>
+            {{produit.description}}
+          </ion-item>
+          <ion-item>
+            Prix : {{produit.prix}}
+          </ion-item>
+        </ion-list>
+      </ion-item>
+      <ion-item>
+        <ion-title></ion-title>
+        <ion-button expand="block" fill="outline" color="primary" routerLink="/viewProduct/{{produit._id}}"><ion-icon name="create-outline"></ion-icon></ion-button>
+        <ion-button  expand="block" fill="outline" color="danger" (click)="alertDeleteProduct([produit._id])"><ion-icon name="trash-outline"></ion-icon></ion-button>
+      </ion-item>
     </ion-card>
   </ion-list>
 </ion-content>

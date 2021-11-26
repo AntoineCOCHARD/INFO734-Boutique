@@ -25,6 +25,7 @@ export class AddBoutiquePage implements OnInit {
       this.boutique = this.formBuilder.group({
             title: [''],
             description: [''],
+            image: [''],
           });
       this.api = restapi;
   }

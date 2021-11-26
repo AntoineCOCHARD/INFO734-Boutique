@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="alertNoSave()"><ion-icon slot="icon-only" name="arrow-round-back"></ion-icon></ion-button>
+      <ion-button (click)="alertNoSave()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
     <ion-title>
       <span *ngIf="produit" ngDefaultControl [(ngModel)]="nom">{{produit.nom}}</span>
@@ -31,6 +31,15 @@
   </ion-item>
   <ion-item>
     <ion-textarea value="{{produit.prix}}" rows="1" *ngIf="produit" ngDefaultControl [(ngModel)]="prix"></ion-textarea>
+  </ion-item>
+  <ion-item color="warning">
+    <ion-label>Image</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-textarea *ngIf="produit" value="{{produit.image}}" rows="7" ngDefaultControl [(ngModel)]="image"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-img *ngIf="produit" style="width: 160px; height: 160px;" src={{produit.image}}></ion-img>
   </ion-item>
 
 </ion-content>

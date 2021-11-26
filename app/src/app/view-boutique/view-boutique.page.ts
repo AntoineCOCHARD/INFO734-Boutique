@@ -15,6 +15,7 @@ export class ViewBoutiquePage implements OnInit {
   id : string;
   title : string;
   description : string;
+  image : string;
   
 
   constructor(public restapi: RestService, 
@@ -43,6 +44,7 @@ export class ViewBoutiquePage implements OnInit {
         this.boutique = res;
         this.title = this.boutique.title;
         this.description = this.boutique.description;
+        this.image = this.boutique.image;
         loading.dismiss();
       }, err => {
         console.log(err);
@@ -76,9 +78,11 @@ export class ViewBoutiquePage implements OnInit {
     console.log(this.description);
     console.log(this.title);
     console.log(this.boutique._id);
+    console.log(this.image);
 
     this.boutique.title = this.title;
     this.boutique.description = this.description;
+    this.boutique.image = this.image;
 
     this.saveBoutique();
 

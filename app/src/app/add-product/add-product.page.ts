@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, LoadingController } from '@ionic/angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { RestService } from '../rest.service';
-import { ActivatedRoute, Router  } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router  } from '@angular/router';
 
 import { AlertController } from '@ionic/angular';
 
@@ -15,6 +15,7 @@ export class AddProductPage implements OnInit {
   private categories : any;
   private produit : FormGroup;
   public api : RestService;
+  private id;
 
   constructor(public restapi: RestService,
     public loadingController: LoadingController,
@@ -27,6 +28,7 @@ export class AddProductPage implements OnInit {
             description: [''],
             prix: [''],
             id_categorie: [''],
+            image: [''],
           });
       this.api = restapi;
   }
@@ -52,7 +54,7 @@ export class AddProductPage implements OnInit {
   async saveProduit(){
     await this.api.createProduit(this.produit.value)
     .subscribe(res => {
-        this.router.navigate(['/listProduct']);
+      this.router.navigate(['/listProduct/' + this.produit.value["id_categorie"]]);
       }, (err) => {
         console.log(err);
       });
@@ -81,7 +83,7 @@ export class AddProductPage implements OnInit {
           text: 'Continuer',
           handler: () => {
             console.log('Continuer');
-            this.router.navigate(['/listProduct/'])
+            this.router.navigate(['/listProduct/' + this.id])
           }
         }
       ]
@@ -91,6 +93,13 @@ export class AddProductPage implements OnInit {
   }
 
   ngOnInit() {
+    this.route.paramMap.subscribe((params : ParamMap)=> {
+      this.id=params.get('id');
+    });
+    console.log("Current id: " + this.id);
+    if(this.id == null){
+      this.id = "";
+    }
     this.getCategories();
   }
 

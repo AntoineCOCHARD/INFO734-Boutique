@@ -17,6 +17,7 @@ export class ViewCategoryPage implements OnInit {
   nom : string;
   description : string;
   prix : string;
+  image : string;
 
   constructor(public restapi: RestService, 
     public loadingController: LoadingController, 
@@ -44,6 +45,7 @@ export class ViewCategoryPage implements OnInit {
         this.category = res;
         this.nom = this.category.nom;
         this.description = this.category.description;
+        this.image = this.category.image;
         loading.dismiss();
       }, err => {
         console.log(err);
@@ -56,7 +58,7 @@ export class ViewCategoryPage implements OnInit {
     await this.api.updateCategory(this.category._id, this.category)
     .subscribe(res => {
         console.log(res);
-        this.router.navigate(['/listCategory/']);
+        this.router.navigate(['/listCategory/'+ this.category.id_boutique]);
       }, (err) => {
         console.log(err);
       });
@@ -66,7 +68,7 @@ export class ViewCategoryPage implements OnInit {
     await this.api.deleteCategory(this.category._id)
     .subscribe(res => {
         console.log(res);
-        this.router.navigate(['/listCategory/']);
+        this.router.navigate(['/listCategory/'+ this.category.id_boutique]);
       }, (err) => {
         console.log(err);
       });
@@ -77,9 +79,11 @@ export class ViewCategoryPage implements OnInit {
     console.log(this.description);
     console.log(this.nom);
     console.log(this.category._id);
+    console.log(this.image);
 
     this.category.nom = this.nom;
     this.category.description = this.description;
+    this.category.image = this.image;
 
     this.saveCategory();
 
@@ -108,7 +112,7 @@ export class ViewCategoryPage implements OnInit {
           text: 'Continuer',
           handler: () => {
             console.log('Continuer');
-            this.router.navigate(['/listCategory/'])
+            this.router.navigate(['/listCategory/'+ this.category.id_boutique])
           }
         }
       ]

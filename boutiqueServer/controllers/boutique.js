@@ -2,7 +2,8 @@ function createBoutique(req, res) {
     let Boutique = require('../models/boutique');
     let newBoutique = Boutique ({
         title: req.body.title,
-        description : req.body.description
+        description : req.body.description,
+        image : req.body.image,
     });
   
     newBoutique.save()
@@ -47,7 +48,8 @@ function updateBoutique(req, res) {
 
     Boutique.findByIdAndUpdate({_id: req.params.id}, 
         {title : req.body.title, 
-        description : req.body.description}, 
+        description : req.body.description,
+        image : req.body.image}, 
         {new : true})
     .then((updatedBoutique) => {
         res.status(200).json(updatedBoutique);
