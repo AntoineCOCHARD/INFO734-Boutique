@@ -1,6 +1,6 @@
 # INFO734 Boutique en ligne
 
-Création d'une application en Nodejs et Ionic, cette application permet l'implémentation de boutiques en ligne.
+Création d'une application en Nodejs et Ionic permettant l'implémentation de boutiques en ligne.
 
 # Structure de l'application
 
